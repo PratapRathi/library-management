@@ -1,8 +1,12 @@
+import BookList from "@/components/BookList";
+import BookOverview from "@/components/BookOverview";
+import { sampleBooks } from "@/contants";
+
  const Home = () => {
   return (
     <>
-      <h1>Home</h1>
-      <p>Welcome to the home page</p>
+      <BookOverview {...sampleBooks[0]}/>
+      <BookList title='Latest Books' books={sampleBooks} containerClassName='mt-28'/>
     </>
   );
 }

@@ -1,5 +1,5 @@
 {
-    "prettier.configPath": "./eslint.config.mjs",
-    "prettier.prettierPath": "./node_modules/prettier",
+    "prettier.configPath": "",
+    "prettier.prettierPath": "",
     "prettier.requireConfig": false
 }
