@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import Link from 'next/link'
-import { FIELD_NAMES, FIELD_TYPES } from '@/contants'
+import { FIELD_NAMES, FIELD_TYPES } from '@/constants'
 import ImageUpload from '@/components/ImageUpload'
 
 interface AuthFormProps<T extends FieldValues> {
