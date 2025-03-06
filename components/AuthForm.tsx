@@ -9,16 +9,19 @@ import { Input } from "@/components/ui/input"
 import Link from 'next/link'
 import { FIELD_NAMES, FIELD_TYPES } from '@/constants'
 import ImageUpload from '@/components/ImageUpload'
+import { toast } from "sonner"
+import { useRouter } from 'next/navigation'
 
 interface AuthFormProps<T extends FieldValues> {
     defaultValues: T;
     schema: ZodType<T>;
-    onSubmit: (data: T) => Promise<{ sucess: boolean, error?: string }>;
+    onSubmit: (data: T) => Promise<{ success: boolean, error?: string }>;
     type: "SIGN_IN" | "SIGN_UP";
 }
 
 const AuthForm = <T extends FieldValues>({ type, schema, defaultValues, onSubmit }: AuthFormProps<T>) => {
 
+    const router = useRouter();
     const isSignIn = type === "SIGN_IN";
 
     const form: UseFormReturn<T> = useForm({
@@ -27,7 +30,20 @@ const AuthForm = <T extends FieldValues>({ type, schema, defaultValues, onSubmit
     })
 
     const handleSubmit: SubmitHandler<T> = async (data) => {
-
+        const result = await onSubmit(data);
+        if(result.success){
+            toast.success("Success", {
+                description: isSignIn? 'You have successfully signed in.' : 'You have successfully signed up.',
+                closeButton: true,
+              });
+            router.push('/');
+        }
+        else {
+            toast.error("Failed", {
+                description: isSignIn? 'Error during sign in' : 'Error during signed up.',
+                closeButton: true,
+              });
+        }
     }
 
     return (
